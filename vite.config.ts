@@ -3,6 +3,6 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "svelte-todo-app",
+  base: "/svelte-todo-app/",
   plugins: [svelte()],
 });
