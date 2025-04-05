@@ -17,6 +17,9 @@ A simple, efficient, and responsive Todo app built with the latest version of **
 - **Drag and Drop Functionality**  
   The app supports drag-and-drop interactions in the **Kanban View**, powered by the **svelte-dnd-action** library for smooth, intuitive task management.
 
+- **Icons via Lucide**  
+  The app uses **Lucide Icons** for a modern, consistent, and customizable icon set throughout the UI. Icons are sourced from [Lucide.dev](https://lucide.dev/) for clean, scalable visuals.
+
 ## Upcoming Features
 
 - **Offline Functionality**  
@@ -31,6 +34,7 @@ A simple, efficient, and responsive Todo app built with the latest version of **
 - **Dexie.js**: A wrapper for IndexedDB to manage local data storage efficiently.
 - **Pico CSS**: A minimalistic, responsive CSS framework used for styling the app, including the light/dark theme support.
 - **svelte-dnd-action**: A library for implementing drag-and-drop functionality in Svelte apps.
+- **Lucide Icons**: A clean, customizable set of icons integrated throughout the app.
 - **Service Workers (Planned)**: For offline functionality in the future.
 
 ## How to Run the App
