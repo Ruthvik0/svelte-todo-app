@@ -49,11 +49,11 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # Step 5: Upload the built artifact (the `build` directory)
+      # Step 5: Upload the built artifact (the `dist` directory)
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './build'   # Ensure this matches the directory where your build output goes
+          path: './dist'
 
       # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
