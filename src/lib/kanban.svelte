@@ -90,4 +90,31 @@
     flex-grow: 3;
     text-transform: capitalize;
   }
+
+  section {
+    max-height: 70vh;
+    overflow-y: scroll;
+  }
+
+  @media (max-width: 770px) {
+    section {
+      max-height: 35vh;
+      overflow-y: scroll;
+    }
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #0172ad;
+    border-radius: 10px; /* rounded corners */
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent; /* transparent track */
+  }
 </style>

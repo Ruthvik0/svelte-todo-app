@@ -34,6 +34,26 @@
 </section>
 
 <style>
+  section {
+    max-height: 70vh;
+    overflow-y: scroll;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #0172ad;
+    border-radius: 10px; /* rounded corners */
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent; /* transparent track */
+  }
+
   article {
     display: flex;
     justify-content: space-between;
