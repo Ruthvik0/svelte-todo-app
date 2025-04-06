@@ -2,34 +2,36 @@
   import { addTask } from "../db/db";
 
   let newTask: string = $state("");
-  let invalidTask: "false" | "true" = $state("false");
+  let invalidTask: boolean = $state(true);
 
-  let { loadAllTasks }: { loadAllTasks: () => Promise<void> } = $props();
+  import { task } from "../state.svelte";
+
+  function onInputChange() {
+    invalidTask = newTask.trim() === "";
+  }
 
   async function formSubmitted(e: Event) {
     e.preventDefault();
-
+    if (newTask === "") {
+      return;
+    }
     await addTask(newTask);
-    newTask = ""; // Reset the input field after adding
-    await loadAllTasks(); // Load all tasks after adding
+    newTask = "";
+    await task.loadAllTasks(); // Load all tasks after adding
   }
-
-  $effect(() => {
-    invalidTask = newTask.trim() === "" ? "true" : "false";
-  });
 </script>
 
 <form onsubmit={formSubmitted}>
   <fieldset role="group">
     <input
+      oninput={() => onInputChange()}
       id="newTask"
       name="task"
       type="text"
       bind:value={newTask}
       placeholder="Go get milk"
       autocomplete="off"
-      aria-invalid={invalidTask}
     />
-    <input disabled={invalidTask === "true"} type="submit" value="Add" />
+    <input disabled={invalidTask} type="submit" value="Add" />
   </fieldset>
 </form>

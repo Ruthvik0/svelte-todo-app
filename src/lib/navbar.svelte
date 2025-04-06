@@ -4,11 +4,11 @@
   import Info from "@lucide/svelte/icons/info";
   import X from "@lucide/svelte/icons/x";
 
-  let isDarkMode = $state<boolean>(true);
+  let isDarkMode: boolean = $state(true);
   let theme = $derived(isDarkMode ? "dark" : "light");
   let showInfoModal: boolean = $state(false);
 
-  let { toggleView }: { toggleView: () => void } = $props();
+  let { viewList = $bindable() } = $props();
 
   function changeTheme() {
     isDarkMode = !isDarkMode;
@@ -25,7 +25,7 @@
       <fieldset style="margin-bottom: 0;margin-top: 10px;">
         <label>
           <input
-            onchange={toggleView}
+            onchange={() => (viewList = !viewList)}
             name="kanban"
             type="checkbox"
             role="switch"

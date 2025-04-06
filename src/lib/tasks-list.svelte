@@ -2,13 +2,7 @@
   import Trash from "@lucide/svelte/icons/trash";
   import { type Task } from "../db/db";
 
-  type Props = {
-    toggleDone: (id: number, done: boolean) => Promise<void>;
-    removeTask: (id: number) => Promise<void>;
-    tasks: Task[];
-  };
-
-  let { toggleDone, removeTask, tasks }: Props = $props();
+  import { task as taskState } from "../state.svelte";
 </script>
 
 <section>
@@ -17,18 +11,21 @@
       <input
         type="checkbox"
         checked={task.done}
-        onchange={() => toggleDone(task.id, !task.done)}
+        onchange={() => taskState.toggleDone(task.id, !task.done)}
       />
       <span class:done={task.done}>{task.title}</span>
-      <Trash style="cursor: pointer;" onclick={() => removeTask(task.id)} />
+      <Trash
+        style="cursor: pointer;"
+        onclick={() => taskState.removeTask(task.id)}
+      />
     </article>
   {/snippet}
 
-  {#if tasks.length <= 0}
+  {#if taskState.tasks.length <= 0}
     <p>Add new tasks</p>
   {/if}
 
-  {#each tasks as task}
+  {#each taskState.tasks as task}
     {@render Task(task)}
   {/each}
 </section>
@@ -37,21 +34,6 @@
   section {
     max-height: 70vh;
     overflow-y: scroll;
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: #0172ad;
-    border-radius: 10px; /* rounded corners */
-    height: 5px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: transparent; /* transparent track */
   }
 
   article {
