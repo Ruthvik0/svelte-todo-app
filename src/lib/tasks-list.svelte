@@ -21,11 +21,11 @@
     </article>
   {/snippet}
 
-  {#if taskState.tasks.length <= 0}
+  {#if taskState.filteredTasks.length <= 0}
     <p>Add new tasks</p>
   {/if}
 
-  {#each taskState.tasks as task}
+  {#each taskState.filteredTasks as task}
     {@render Task(task)}
   {/each}
 </section>

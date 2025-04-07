@@ -1,9 +1,14 @@
 import { deleteTask, getAllTasks, updateTask, type Task } from "./db/db";
 
 class Tasks {
-  tasks: Task[] = $state([]);
-  tasksCompleted = $derived(this.tasks.filter((task) => task.done));
-  tasksNotCompleted = $derived(this.tasks.filter((task) => !task.done));
+  private tasks: Task[] = $state([]);
+  searchValue: string = $state("");
+
+  filteredTasks: Task[] = $derived(
+    this.tasks.filter((t) =>
+      t.title.toLowerCase().includes(this.searchValue.toLowerCase())
+    )
+  );
 
   async loadAllTasks() {
     this.tasks = await getAllTasks();

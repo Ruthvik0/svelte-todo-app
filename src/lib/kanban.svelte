@@ -1,11 +1,19 @@
 <script lang="ts">
   import { dndzone } from "svelte-dnd-action";
   import Trash from "@lucide/svelte/icons/trash";
+  import type { Task } from "../db/db";
 
   import { task as taskState } from "../state.svelte";
 
+  let tasksCompleted: Task[] = $derived(
+    taskState.filteredTasks.filter((t) => t.done)
+  );
+  let tasksNotCompleted: Task[] = $derived(
+    taskState.filteredTasks.filter((t) => !t.done)
+  );
+
   function todoHandleDndConsider(e: any) {
-    taskState.tasksNotCompleted = e.detail.items;
+    tasksNotCompleted = e.detail.items;
   }
 
   // Update the task state when it is moved
@@ -18,7 +26,7 @@
   }
 
   function completedHandleDndConsider(e: any) {
-    taskState.tasksCompleted = e.detail.items;
+    tasksCompleted = e.detail.items;
   }
 
   // Update the task state when it is moved
@@ -33,14 +41,14 @@
 
 <div class="grid">
   <section>
-    <h1>Todo</h1>
+    <h4>Todo</h4>
     <div
       style="min-height: 10rem;"
-      use:dndzone={{ items: taskState.tasksNotCompleted }}
+      use:dndzone={{ items: tasksNotCompleted }}
       onconsider={todoHandleDndConsider}
       onfinalize={todoHandleDndFinalize}
     >
-      {#each taskState.tasksNotCompleted as item (item.id)}
+      {#each tasksNotCompleted as item (item.id)}
         <article class="card">
           <span>
             {item.title}
@@ -55,14 +63,14 @@
   </section>
 
   <section>
-    <h1>Completed</h1>
+    <h4>Completed</h4>
     <div
       style="min-height: 10rem;"
-      use:dndzone={{ items: taskState.tasksCompleted }}
+      use:dndzone={{ items: tasksCompleted }}
       onconsider={completedHandleDndConsider}
       onfinalize={completedHandleDndFinalize}
     >
-      {#each taskState.tasksCompleted as item (item.id)}
+      {#each tasksCompleted as item (item.id)}
         <article class="card">
           <span>
             {item.title}
@@ -89,7 +97,7 @@
   }
 
   section {
-    max-height: 70vh;
+    max-height: 60vh;
     overflow-y: scroll;
   }
 
